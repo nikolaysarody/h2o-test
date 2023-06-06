@@ -37,5 +37,6 @@ module.exports = {
         'import/extensions': 0,
         'import/no-extraneous-dependencies': 1,
         'max-len': [2, { ignoreComments: true, code: 100 }],
+        'arrow-body-style': 0,
     },
 };

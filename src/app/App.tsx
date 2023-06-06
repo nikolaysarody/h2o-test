@@ -1,9 +1,14 @@
 import { FC } from 'react';
 import { classNames } from 'shared/lib/helpers/classNames/classNames';
+import { AppRouter } from 'app/providers/router';
 import './styles/index.scss';
 
-export const App: FC = () => (
-    <div className={classNames('app')}>
-        <h1>Hello world</h1>
-    </div>
-);
+export const App: FC = () => {
+    return (
+        <div className={classNames('app')}>
+            <div className="content-page">
+                <AppRouter />
+            </div>
+        </div>
+    );
+};
