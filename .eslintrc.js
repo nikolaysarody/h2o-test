@@ -46,5 +46,10 @@ module.exports = {
         'arrow-body-style': 0,
         'react-hooks/rules-of-hooks': 2,
         'react-hooks/exhaustive-deps': 2,
+        'no-underscore-dangle': 0,
+        'no-param-reassign': 0,
+    },
+    globals: {
+        __IS_DEV__: true,
     },
 };
