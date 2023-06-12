@@ -41,7 +41,7 @@ module.exports = {
         'import/no-extraneous-dependencies': 1,
         'max-len': [2, {
             ignoreComments: true,
-            code: 100,
+            code: 120,
         }],
         'arrow-body-style': 0,
         'react-hooks/rules-of-hooks': 2,
