@@ -1,0 +1,24 @@
+.Sidebar {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 267px;
+    height: 100vh;
+    background: linear-gradient(180deg, #54D3C2 0%, #30898A 100%);
+    border-radius: 56px 56px 0 56px;
+    position: fixed;
+}
+
+.items {
+    width: 127px;
+    height: 594px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.logo {
+    padding: 54px 0 67px 31px;
+}

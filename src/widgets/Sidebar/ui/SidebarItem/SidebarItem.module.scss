@@ -1,0 +1,14 @@
+.SideBarItem {
+    display: flex;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    justify-content: center;
+
+    &.active {
+        background: rgba(169, 233, 224, 0.75);
+    }
+}
+
+
