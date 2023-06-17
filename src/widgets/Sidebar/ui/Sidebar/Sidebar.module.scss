@@ -10,7 +10,7 @@
 }
 
 .items {
-    width: 127px;
+    width: var(--sidebar-width);
     height: 594px;
     display: flex;
     flex-direction: column;

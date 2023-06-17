@@ -1,6 +1,6 @@
 import { RouteProps } from 'react-router-dom';
-import { NotFoundPage } from 'pages/NotFoundPage';
 import { EmployersPage } from 'pages/EmployersPage';
+import { NotFoundPage } from 'pages/NotFoundPage';
 
 export enum AppRoutes {
     EMPLOYERS = 'employers',

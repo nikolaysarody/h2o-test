@@ -1,9 +1,10 @@
 @import "./variables/global";
 @import "reset";
+@import "fonts";
 
 body {
     font: var(--font-m);
-    color: var(--primary-color);
+    letter-spacing: 0.0233rem;
 }
 
 .app {
@@ -13,9 +14,14 @@ body {
 
 .content-page {
     display: flex;
+    flex-direction: column;
+    margin-left: var(--sidebar-width);
+    background: #FFFFFF;
+    border-radius: 56px;
+    position: relative;
+    height: 100vh;
 }
 
 .page-wrapper {
     flex-grow: 1;
-    padding: 20px;
 }

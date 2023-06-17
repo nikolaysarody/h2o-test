@@ -1,0 +1,26 @@
+.MenuItem {
+    color: #D2D1D1;
+    font-weight: 600;
+    margin-right: 40px;
+    cursor: pointer;
+    user-select: none;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &.active {
+        position: relative;
+        color: #323F47;
+        font-weight: 700;
+        padding-bottom: 9.5px;
+
+        &:after {
+            content: '';
+            display: block;
+            position: relative;
+            top: 11px;
+            border-bottom: 4.5px solid #54D3C2;
+        }
+    }
+}

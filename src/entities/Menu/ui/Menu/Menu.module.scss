@@ -1,0 +1,40 @@
+.Menu {
+    display: flex;
+    align-items: center;
+}
+
+.navigation {
+    display: flex;
+}
+
+.icon {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 18px rgba(210, 209, 209, 0.5);
+
+    &.left {
+        padding-left: 5px;
+        transform: rotate(-180deg);
+    }
+
+    &.right {
+        padding-left: 5px;
+        margin-left: 8px;
+    }
+}
+
+.menuList {
+    list-style-type: none;
+    display: flex;
+    margin-left: 40px;
+    border-bottom: 1.5px solid #D2D1D1;
+}
