@@ -14,7 +14,7 @@ export const MenuItem = ({ item, isActive, setActive }: MenuItemProps) => {
             className={classNames(styles.MenuItem, { [styles.active]: isActive })}
             onClick={() => setActive(item.id)}
         >
-            <span>{item.text}</span>
+            <p>{item.text}</p>
         </li>
     );
 };

@@ -1,5 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Menu } from 'entities/Menu/ui/Menu/Menu';
+import { Menu } from 'entities/Menu';
+import { Profile } from 'entities/Profile';
 import styles from './EmployersNavbar.module.scss';
 
 interface NavbarProps {
@@ -8,8 +9,9 @@ interface NavbarProps {
 
 export const EmployersNavbar = ({ className }: NavbarProps) => {
     return (
-        <div className={classNames(styles.Navbar, {}, [className])}>
+        <nav className={classNames(styles.Navbar, {}, [className])}>
             <Menu />
-        </div>
+            <Profile />
+        </nav>
     );
 };

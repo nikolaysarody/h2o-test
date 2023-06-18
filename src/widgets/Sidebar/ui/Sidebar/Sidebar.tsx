@@ -13,13 +13,13 @@ export const Sidebar = memo(() => {
     )), []);
 
     return (
-        <nav className={styles.Sidebar}>
+        <aside className={styles.Sidebar}>
             <div className={styles.logo}>
                 <LogoIcon />
             </div>
-            <div className={styles.items}>
+            <ul className={styles.items}>
                 {itemsList}
-            </div>
-        </nav>
+            </ul>
+        </aside>
     );
 });

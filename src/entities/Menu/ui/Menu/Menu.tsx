@@ -1,54 +1,59 @@
+import {
+    memo,
+    useCallback, useEffect,
+    useMemo, useRef,
+    useState,
+} from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
-import ArrowIcon from 'shared/assets/icons/arrow.svg';
-import { useMemo, useState } from 'react';
 import { MenuItem } from 'entities/Menu/ui/MenuItem/MenuItem';
 import { MenuItemsList } from 'entities/Menu/model/items';
+import { MenuNavigation } from 'entities/Menu/ui/MenuNavigation/ui/MenuNavigation';
 import styles from './Menu.module.scss';
 
 interface MenuProps {
     className?: string;
 }
 
-export const Menu = ({ className }: MenuProps) => {
+export const Menu = memo(({ className }: MenuProps) => {
     const [activeItem, setActiveItem] = useState<number>(1);
+    const navMenuRef = useRef<HTMLUListElement>(null);
+
+    const setActiveHandler = useCallback((value) => {
+        setActiveItem(value);
+    }, []);
+
     const itemsList = useMemo(() => MenuItemsList.map((item) => (
         <MenuItem
             item={item}
             key={item.text}
             isActive={activeItem === item.id}
-            setActive={setActiveItem}
+            setActive={setActiveHandler}
         />
-    )), [activeItem]);
+    )), [activeItem, setActiveHandler]);
+
+    useEffect(() => {
+        if (navMenuRef.current !== null) {
+            if (activeItem === 3) {
+                navMenuRef.current.style.right = '92px';
+            }
+            if (activeItem === 0) {
+                navMenuRef.current.style.right = '0';
+            }
+        }
+    }, [activeItem]);
 
     return (
-        <div className={classNames(styles.Menu, {}, [className])}>
-            <div className={styles.navigation}>
-                <button
-                    type="button"
-                    className={classNames(styles.icon, {}, [styles.left])}
-                    onClick={() => {
-                        if (activeItem > 0) {
-                            setActiveItem((prev) => prev - 1);
-                        }
-                    }}
+        <header className={classNames(styles.Menu, {}, [className])}>
+            <MenuNavigation activeItem={activeItem} setActiveItem={setActiveHandler} />
+            <div className={styles.wrapper}>
+                <ul
+                    role="navigation"
+                    className={styles.menuList}
+                    ref={navMenuRef}
                 >
-                    <ArrowIcon />
-                </button>
-                <button
-                    type="button"
-                    className={classNames(styles.icon, {}, [styles.right])}
-                    onClick={() => {
-                        if (activeItem < MenuItemsList.length - 1) {
-                            setActiveItem((prev) => prev + 1);
-                        }
-                    }}
-                >
-                    <ArrowIcon />
-                </button>
+                    {itemsList}
+                </ul>
             </div>
-            <ul className={styles.menuList}>
-                {itemsList}
-            </ul>
-        </div>
+        </header>
     );
-};
+});

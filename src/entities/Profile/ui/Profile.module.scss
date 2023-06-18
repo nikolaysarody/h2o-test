@@ -1,0 +1,38 @@
+.Profile {
+    display: flex;
+    align-items: center;
+    width: 361px;
+    height: 56px;
+    position: relative;
+}
+
+.img {
+    width: 56px;
+    height: 56px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 23px;
+
+    h4 {
+        font-weight: 700;
+        letter-spacing: 0.44px;
+    }
+
+    p {
+        font-weight: 500;
+        font-size: var(--font-size-s);
+        line-height: var(--font-line-s);
+        color: #989FA3;
+        letter-spacing: 0.15px;
+        position: relative;
+        bottom: 7px
+    }
+}
+
+.icon {
+    position: absolute;
+    right: 0;
+}

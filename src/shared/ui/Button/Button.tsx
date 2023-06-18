@@ -1,32 +1,48 @@
-import { ButtonHTMLAttributes, FC } from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
-import styles from './Button.module.scss';
+import {
+    ButtonHTMLAttributes,
+    ForwardedRef,
+    forwardRef,
+    ReactNode,
+} from 'react';
+import { classNames, Mods } from 'shared/lib/classNames/classNames';
+import cls from './Button.module.scss';
 
-export enum ThemeButton {
-    CLEAR = 'clear',
-    OUTLINE = 'outline',
-}
+export type ButtonVariant = 'clear' | 'outline' | 'filled';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
-    theme?: ThemeButton;
+    variant?: ButtonVariant;
+    disabled?: boolean;
+    children?: ReactNode;
 }
 
-export const Button: FC<ButtonProps> = (props) => {
-    const {
-        className,
-        children,
-        theme = ThemeButton.OUTLINE,
-        ...otherProps
-    } = props;
+export const Button = forwardRef(
+    (props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
+        const {
+            className,
+            children,
+            variant = 'clear',
+            disabled,
+            ...otherProps
+        } = props;
 
-    return (
-        <button
-            type="button"
-            className={classNames(styles.Button, {}, [className, styles[theme]])}
-            {...otherProps}
-        >
-            {children}
-        </button>
-    );
-};
+        const mods: Mods = {
+            [cls.disabled]: disabled,
+        };
+
+        return (
+            <button
+                type="button"
+                className={classNames(cls.Button, mods, [
+                    className,
+                    cls[variant],
+                ])}
+                disabled={disabled}
+                {...otherProps}
+                ref={ref}
+            >
+                {children}
+            </button>
+        );
+    },
+);

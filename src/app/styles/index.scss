@@ -10,6 +10,13 @@ body {
 .app {
     background: var(--bg-color);
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    min-width: 1529px;
 }
 
 .content-page {
