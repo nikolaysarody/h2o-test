@@ -6,9 +6,9 @@ export const App = () => {
         <div className="app">
             <div className="wrapper">
                 <Sidebar />
-                <main className="content-page">
+                <div className="content-page">
                     <AppRouter />
-                </main>
+                </div>
             </div>
         </div>
     );

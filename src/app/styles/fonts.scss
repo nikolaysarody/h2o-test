@@ -12,6 +12,12 @@
 
 @font-face {
     font-family: 'ProximaNova';
+    src: url("../../../public/fonts/ProximaNova-Semibold.ttf") format('truetype');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'ProximaNova';
     src: url("../../../public/fonts/proximanova_bold.otf") format('opentype');
     font-weight: 700;
 }

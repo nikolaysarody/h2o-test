@@ -1,0 +1,25 @@
+.Contacts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 132px;
+    height: 44px;
+    margin-left: 34px;
+}
+
+.amount {
+    font-size: var(--font-size-xl);
+    line-height: var(--font-line-xl);
+    font-weight: 600;
+    color: #54D3C2;
+    letter-spacing: -0.56px;
+}
+
+.title {
+    margin-left: 14px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 44px;
+    letter-spacing: -0.56px;
+    color: #6D7986;
+}

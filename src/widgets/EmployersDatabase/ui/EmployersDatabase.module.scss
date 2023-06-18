@@ -1,0 +1,27 @@
+.EmployersDatabase {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: #F8F8F8;
+    border-radius: 56px;
+}
+
+.header {
+    padding: 27px 0 0 40px;
+    font-weight: 800;
+    font-size: var(--font-size-xl);
+    line-height: var(--font-line-xl);
+    letter-spacing: -0.56px;
+    color: #323F47;
+}
+
+.tools {
+    display: flex;
+    align-items: center;
+    width: 1318px;
+    height: 127px;
+    background: #FFFFFF;
+    border-radius: 32px;
+    margin: 21px 0 0 42px;
+    position: relative;
+}
