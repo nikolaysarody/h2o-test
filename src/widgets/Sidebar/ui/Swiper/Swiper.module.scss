@@ -1,0 +1,22 @@
+.Swiper {
+    position: relative;
+    border-left: 1.5px solid #54D3C2;;
+    height: 100%;
+}
+
+.icon {
+    position: absolute;
+    left: calc(32px / 2 * -1);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.open {
+    rotate: 180deg;
+    transition: rotate 0.2s;
+}
+
+.close {
+    rotate: 0deg;
+    transition: rotate 0.2s;
+}
