@@ -26,7 +26,6 @@ td {
     letter-spacing: -0.56px;
     color: #6D7986;
     height: 50px;
-    border-bottom: 0;
 }
 
 tbody {
@@ -48,10 +47,16 @@ tbody {
     position: relative;
 }
 
+.info {
+    display: flex;
+    padding-bottom: 26px;
+}
+
 .tableScroll {
     display: flex;
     overflow-x: scroll;
     width: 100%;
+    padding-bottom: 26px;
 
     th, td {
         &:last-child {
