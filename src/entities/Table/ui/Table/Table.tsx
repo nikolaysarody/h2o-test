@@ -13,6 +13,14 @@ interface TableProps {
     sortData: (rule: string) => void;
 }
 
+const checkDate = (date: Date) => {
+    return new Date() > date;
+};
+
+const parseDate = (value: string) => {
+    return value.split('.');
+};
+
 export const Table = memo((props: TableProps) => {
     const {
         currentEmployersList,
@@ -53,11 +61,31 @@ export const Table = memo((props: TableProps) => {
             <td>{item.citizenship}</td>
             <td>{item.passport}</td>
             <td>{item.issued}</td>
-            <td>{item.validity_passport}</td>
+            <td
+                className={
+                    checkDate(new Date(
+                        +parseDate(item.validity_passport)[2],
+                        +parseDate(item.validity_passport)[1],
+                        +parseDate(item.validity_passport)[0],
+                    )) ? styles.expired : ''
+                }
+            >
+                {item.validity_passport}
+            </td>
             <td>{item.birthplace}</td>
             <td>{item.residence}</td>
             <td>{item.patent}</td>
-            <td>{item.validity_patent}</td>
+            <td
+                className={
+                    checkDate(new Date(
+                        +parseDate(item.validity_patent)[2],
+                        +parseDate(item.validity_patent)[1],
+                        +parseDate(item.validity_patent)[0],
+                    )) ? styles.expired : ''
+                }
+            >
+                {item.validity_patent}
+            </td>
             <td>{item.snils}</td>
             <td>{item.inn}</td>
             <td>{item.medcard}</td>
