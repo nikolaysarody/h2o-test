@@ -3,39 +3,12 @@
     position: relative;
 }
 
-th, td {
-    border: 1.5px solid #F8F8F8;
-    white-space: nowrap;
-    border-left: 0;
-}
-
-th {
-    border-top: 0;
-    font-weight: 700;
-    font-size: 12px;
-    color: #54D3C2;
-    text-align: start;
-}
-
-td {
-    padding: 1px 17px 2px 17px;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 44px;
-    letter-spacing: -0.56px;
-    color: #6D7986;
-}
-
 tbody {
     tr {
         &:nth-child(2n+1) {
             background: rgba(248, 248, 248, 0.5);
         }
     }
-}
-
-.thCenter {
-    text-align: center;
 }
 
 .wrapper {
@@ -94,3 +67,4 @@ tbody {
 .tableWrapper {
     position: relative;
 }
+

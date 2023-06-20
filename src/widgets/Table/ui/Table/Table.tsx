@@ -20,6 +20,21 @@ export const Table = memo(() => {
     const [currentEmployer, setCurrentEmployer] = useState<EmployersType[]>(
         Employers.slice(firstEmployerIndex, lastEmployerIndex),
     );
+    const [sortCol, setSortCol] = useState<string>('');
+
+    const returnEmployersToInitial = useCallback(() => {
+        setCurrentEmployer(Employers.slice(firstEmployerIndex, lastEmployerIndex));
+    }, [firstEmployerIndex, lastEmployerIndex]);
+
+    const sortData = useCallback((rule: string) => {
+        console.log(rule);
+        if (sortCol === '') {
+            setSortCol(rule);
+        } else {
+            setSortCol('');
+            returnEmployersToInitial();
+        }
+    }, [returnEmployersToInitial, sortCol]);
 
     const pageNumbers = useCallback(() => {
         const numbers = [];
@@ -30,6 +45,16 @@ export const Table = memo(() => {
     }, [employersPerPage]);
 
     const paginate = (number: number) => setCurrentPage(number);
+
+    useEffect(() => {
+        setCurrentEmployer((prev) => {
+            const copyData = prev.concat();
+            const sortData = copyData.sort((a, b) => {
+                return a[sortCol as keyof EmployersType] > b[sortCol as keyof EmployersType] ? 1 : -1;
+            });
+            return sortData;
+        });
+    }, [sortCol]);
 
     useEffect(() => {
         setLastEmployerIndex(currentPage * employersPerPage);
@@ -43,15 +68,16 @@ export const Table = memo(() => {
         setCurrentEmployer(Employers.slice(firstEmployerIndex, lastEmployerIndex));
     }, [firstEmployerIndex, lastEmployerIndex]);
 
+    // массивы данных таблицы
     const employersNames = useMemo(() => currentEmployer.map((item, index) => (
         <tr key={`${item.name}_${item.number}`}>
-            <td>{item.number}</td>
+            <td>{index + 1}</td>
             <td className={styles.hoverable}>{item.name}</td>
         </tr>
     )), [currentEmployer]);
 
-    const employersInfos = useMemo(() => currentEmployer.map((item, index) => (
-        <tr key={`${item.id}_${index}`}>
+    const employersInfos = useMemo(() => currentEmployer.map((item) => (
+        <tr key={`${item.id}_${item.number}`}>
             <td>{item.id}</td>
             <td>{item.phone}</td>
             <td>{item.gender}</td>
@@ -61,15 +87,15 @@ export const Table = memo(() => {
         </tr>
     )), [currentEmployer]);
 
-    const employersBanks = useMemo(() => currentEmployer.map((item, index) => (
-        <tr key={`${item.bank}_${index}`}>
+    const employersBanks = useMemo(() => currentEmployer.map((item) => (
+        <tr key={`${item.bank}_${item.number}`}>
             <td>{item.bank}</td>
             <td>{item.card}</td>
         </tr>
     )), [currentEmployer]);
 
-    const employersDocs = useMemo(() => currentEmployer.map((item, index) => (
-        <tr key={`${item.citizenship}_${index}`}>
+    const employersDocs = useMemo(() => currentEmployer.map((item) => (
+        <tr key={`${item.citizenship}_${item.number}`}>
             <td>{item.citizenship}</td>
             <td>{item.passport}</td>
             <td>{item.issued}</td>
@@ -84,8 +110,8 @@ export const Table = memo(() => {
         </tr>
     )), [currentEmployer]);
 
-    const employersHR = useMemo(() => currentEmployer.map((item, index) => (
-        <tr key={`${item.post}_${index}`}>
+    const employersHR = useMemo(() => currentEmployer.map((item) => (
+        <tr key={`${item.post}_${item.number}`}>
             <td>{item.post}</td>
             <td>{item.subdivision}</td>
             <td>{item.solution}</td>
@@ -95,6 +121,7 @@ export const Table = memo(() => {
         </tr>
     )), [currentEmployer]);
 
+    // функции для сворачивания и разворачивания частей таблицы
     const swipeBank = () => {
         setBankOpen((prev) => !prev);
         setDocsOpen(false);
@@ -114,30 +141,32 @@ export const Table = memo(() => {
         <div className={styles.container}>
             <div className={styles.wrapper}>
                 <div className={styles.info}>
-                    <table className={styles.Table}>
-                        <thead>
-                            <tr>
-                                <th>№</th>
-                                <th>Имя сотрудника</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {employersNames}
-                        </tbody>
-                    </table>
+                    <TableItem
+                        head={{
+                            cols: [
+                                { rus: '№' },
+                                { rus: 'Имя сотрудника', eng: 'name' },
+                            ],
+                            sortableIndex: [1],
+                            sortableCallback: sortData,
+                        }}
+                        body={employersNames}
+                    />
                 </div>
                 <div className={styles.tableScroll}>
                     <TableItem
                         head={{
                             title: 'Основная информация',
                             cols: [
-                                'ID',
-                                'Номер телефона',
-                                'Пол',
-                                'Дата рождения',
-                                'Метро',
-                                'Адрес проживания',
+                                { rus: 'ID' },
+                                { rus: 'Номер телефона' },
+                                { rus: 'Пол', eng: 'gender' },
+                                { rus: 'Дата рождения' },
+                                { rus: 'Метро', eng: 'metro' },
+                                { rus: 'Адрес проживания' },
                             ],
+                            sortableIndex: [2, 4],
+                            sortableCallback: sortData,
                         }}
                         body={employersInfos}
                     />
@@ -147,9 +176,11 @@ export const Table = memo(() => {
                             head={{
                                 title: 'Банковская информация',
                                 cols: [
-                                    'Банк',
-                                    'Номер карты',
+                                    { rus: 'Банк', eng: 'bank' },
+                                    { rus: 'Номер карты' },
                                 ],
+                                sortableIndex: [0],
+                                sortableCallback: sortData,
                             }}
                             body={employersBanks}
                         />
@@ -160,18 +191,20 @@ export const Table = memo(() => {
                             head={{
                                 title: 'Документы сотрудника',
                                 cols: [
-                                    'Гражданство',
-                                    'Паспорт',
-                                    'Кем выдан',
-                                    'Срок действия',
-                                    'Место рождения',
-                                    'Адрес прописки',
-                                    'Патент',
-                                    'Срок действия',
-                                    'СНИЛС',
-                                    'ИНН',
-                                    'Мед. книжка',
+                                    { rus: 'Гражданство', eng: 'citizenship' },
+                                    { rus: 'Паспорт' },
+                                    { rus: 'Кем выдан' },
+                                    { rus: 'Срок действия' },
+                                    { rus: 'Место рождения' },
+                                    { rus: 'Адрес прописки' },
+                                    { rus: 'Патент', eng: 'patent' },
+                                    { rus: 'Срок действия' },
+                                    { rus: 'СНИЛС' },
+                                    { rus: 'ИНН' },
+                                    { rus: 'Мед. книжка' },
                                 ],
+                                sortableIndex: [0, 6],
+                                sortableCallback: sortData,
                             }}
                             body={employersDocs}
                         />
@@ -182,13 +215,15 @@ export const Table = memo(() => {
                             head={{
                                 title: 'Информация от HR',
                                 cols: [
-                                    'Должность',
-                                    'Подразделение',
-                                    'Решение',
-                                    'Источник',
-                                    'Дата',
-                                    'Примечание',
+                                    { rus: 'Должность', eng: 'post' },
+                                    { rus: 'Подразделение', eng: 'subdivision' },
+                                    { rus: 'Решение', eng: 'solution' },
+                                    { rus: 'Источник' },
+                                    { rus: 'Дата' },
+                                    { rus: 'Примечание' },
                                 ],
+                                sortableIndex: [0, 1, 2],
+                                sortableCallback: sortData,
                             }}
                             body={employersHR}
                         />

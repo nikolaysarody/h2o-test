@@ -20,6 +20,7 @@ th {
 }
 
 td {
+    padding: 1px 17px 2px 17px;
     font-weight: 600;
     font-size: 12px;
     line-height: 44px;
@@ -30,4 +31,27 @@ td {
 
 .thCenter {
     text-align: center;
+}
+
+.sortable {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    right: 0;
+    margin-top: 5px;
+    margin-right: 8px;
+
+    &.open {
+        rotate: 180deg;
+        transition: rotate 0.2s;
+    }
+
+    &.close {
+        rotate: 0deg;
+        transition: rotate 0.2s;
+    }
 }

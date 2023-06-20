@@ -26,7 +26,7 @@ export const Pagination = memo((props: PaginationProps) => {
         currentPage,
     } = props;
     return (
-        <div className={styles.Pagination}>
+        <article className={styles.Pagination}>
             <p className={styles.count}>
                 {`показано ${firstEmployerIndex}-${lastEmployerIndex} из ${totalEmployers} результатов`}
             </p>
@@ -55,30 +55,27 @@ export const Pagination = memo((props: PaginationProps) => {
             </div>
             <div className={styles.pageSelector}>
                 <p>отображать на странице</p>
-                <select>
+                <select defaultValue={employersPerPage}>
                     <option
                         value={10}
-                        selected={employersPerPage === 10}
                         onClick={() => setEmployersPerPage(10)}
                     >
                         10
                     </option>
                     <option
                         value={15}
-                        selected={employersPerPage === 15}
                         onClick={() => setEmployersPerPage(15)}
                     >
                         15
                     </option>
                     <option
                         value={20}
-                        selected={employersPerPage === 20}
                         onClick={() => setEmployersPerPage(20)}
                     >
                         20
                     </option>
                 </select>
             </div>
-        </div>
+        </article>
     );
 });
