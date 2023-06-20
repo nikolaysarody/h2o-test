@@ -3,7 +3,7 @@ import { EmployersNavbar } from 'widgets/EmployersNavbar';
 import { Contacts } from 'entities/Contacts';
 import { EmployerSearch } from 'features/EmployerSearch';
 import { EditMode } from 'features/EditMode';
-import { Table } from 'widgets/Table';
+import { EmployersTable } from 'widgets/EmployersTable';
 import styles from './EmployersPage.module.scss';
 
 const EmployersPage = () => {
@@ -18,7 +18,7 @@ const EmployersPage = () => {
                     <EditMode />
                 </article>
                 <article className={styles.table}>
-                    <Table />
+                    <EmployersTable />
                 </article>
             </section>
         </main>

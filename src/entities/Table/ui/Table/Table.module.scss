@@ -19,12 +19,6 @@ tbody {
     flex-grow: 1;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
 .info {
     display: flex;
     padding-bottom: 26px;
@@ -33,7 +27,7 @@ tbody {
     position: relative;
 }
 
-.tableScroll {
+.scroll {
     display: flex;
     overflow-x: scroll;
     width: 100%;
@@ -63,8 +57,3 @@ tbody {
         color: #54D3C2;
     }
 }
-
-.tableWrapper {
-    position: relative;
-}
-

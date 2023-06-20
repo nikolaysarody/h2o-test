@@ -1,7 +1,7 @@
 import { Contacts } from 'entities/Contacts';
 import { EmployerSearch } from 'features/EmployerSearch';
 import { EditMode } from 'features/EditMode';
-import { Table } from 'widgets/Table';
+import { EmployersTable } from 'widgets/EmployersTable';
 import styles from './EmployersDatabase.module.scss';
 
 export const EmployersDatabase = () => {
@@ -14,7 +14,7 @@ export const EmployersDatabase = () => {
                 <EditMode />
             </article>
             <article className={styles.table}>
-                <Table />
+                <EmployersTable />
             </article>
         </section>
     );

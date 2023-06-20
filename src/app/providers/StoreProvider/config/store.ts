@@ -1,5 +1,5 @@
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
-import { tableReducer } from 'widgets/Table/model/slice/tableSlice';
+import { tableReducer } from 'entities/Table/model/slice/tableSlice';
 import { StateSchema } from './StateSchema';
 
 export function createReduxStore(

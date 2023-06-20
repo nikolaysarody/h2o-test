@@ -1,4 +1,4 @@
-import { TableSchema } from 'widgets/Table/model/types/tableSchema';
+import { TableSchema } from 'entities/Table/model/types/tableSchema';
 
 export interface StateSchema {
     table: TableSchema;
