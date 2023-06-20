@@ -7,16 +7,17 @@
 .icon {
     position: absolute;
     left: calc(32px / 2 * -1);
+    top: -40px;
     cursor: pointer;
     z-index: 1000;
 }
 
 .open {
-    rotate: 180deg;
+    rotate: 0deg;
     transition: rotate 0.2s;
 }
 
 .close {
-    rotate: 0deg;
+    rotate: 180deg;
     transition: rotate 0.2s;
 }

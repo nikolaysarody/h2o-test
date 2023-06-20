@@ -5,7 +5,6 @@
 
 th, td {
     border: 1.5px solid #F8F8F8;
-    padding: 10px 17px 10px 17px;
     white-space: nowrap;
     border-left: 0;
 }
@@ -14,18 +13,17 @@ th {
     border-top: 0;
     font-weight: 700;
     font-size: 12px;
-    line-height: 120%;
     color: #54D3C2;
     text-align: start;
 }
 
 td {
+    padding: 1px 17px 2px 17px;
     font-weight: 600;
     font-size: 12px;
     line-height: 44px;
     letter-spacing: -0.56px;
     color: #6D7986;
-    height: 50px;
 }
 
 tbody {
@@ -45,11 +43,21 @@ tbody {
     flex-direction: row;
     width: 100%;
     position: relative;
+    flex-grow: 1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .info {
     display: flex;
     padding-bottom: 26px;
+    padding-top: 40px;
+    top: -40px;
+    position: relative;
 }
 
 .tableScroll {
@@ -57,6 +65,9 @@ tbody {
     overflow-x: scroll;
     width: 100%;
     padding-bottom: 26px;
+    padding-top: 40px;
+    top: -40px;
+    position: relative;
 
     th, td {
         &:last-child {

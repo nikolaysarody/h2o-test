@@ -1,7 +1,7 @@
-import { Contacts } from 'entities/Contacts/ui/Contacts';
+import { Contacts } from 'entities/Contacts';
 import { EmployerSearch } from 'features/EmployerSearch';
-import { EditMode } from 'features/EditMode/ui/EditMode';
-import { Table } from 'entities/Table';
+import { EditMode } from 'features/EditMode';
+import { Table } from 'widgets/Table';
 import styles from './EmployersDatabase.module.scss';
 
 export const EmployersDatabase = () => {

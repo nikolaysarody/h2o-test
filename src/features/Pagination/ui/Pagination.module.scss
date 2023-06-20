@@ -1,0 +1,89 @@
+.Pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 36px 26px 36px;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    margin: 0 39px 0 39px;
+
+    &Wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.icon {
+    cursor: pointer;
+
+    &.right {
+        rotate: 180deg;
+    }
+}
+
+.item {
+    margin-right: 19px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    button {
+        cursor: pointer;
+        outline: none;
+        border: 0;
+        background-color: inherit;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
+
+.count {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 44px;
+    letter-spacing: -0.56px;
+    color: #6D7986;
+    width: 211px;
+}
+
+.pageSelector {
+    display: flex;
+
+    p {
+        margin-right: 26px;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: -0.56px;
+        color: #6D7986;
+    }
+
+    select {
+        width: 51px;
+        height: 24px;
+        background: #FFFFFF;
+        border: 1.5px solid #F8F8F8;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 44px;
+        letter-spacing: -0.56px;
+        text-align: center;
+    }
+
+    option {
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 44px;
+        letter-spacing: -0.56px;
+    }
+}
+
+.current {
+    color: #54D3C2;
+}
