@@ -1,8 +1,7 @@
-import { CounterSchema } from 'entities/Counter';
+import { TableSchema } from 'widgets/Table/model/types/tableSchema';
 
 export interface StateSchema {
-    counter: CounterSchema;
-
+    table: TableSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

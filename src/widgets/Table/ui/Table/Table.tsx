@@ -7,7 +7,18 @@ import { Employers, EmployersType } from 'shared/assets/model';
 import { Swiper } from 'shared/ui/Swiper/Swiper';
 import { TableItem } from 'widgets/Table/ui/TableItem/TableItem';
 import { Pagination } from 'features/Pagination';
+import { useSelector } from 'react-redux';
+import { getSearch } from 'widgets/Table/model/selectors/getSearch/getSearch';
 import styles from './Table.module.scss';
+
+const filterEmployers = (searchText: string, listOfEmployers: EmployersType[]) => {
+    if (!searchText) {
+        return listOfEmployers;
+    }
+    return listOfEmployers.filter(({ name }) => {
+        return name.toLowerCase().includes(searchText.toLowerCase());
+    });
+};
 
 export const Table = memo(() => {
     const [isBankOpen, setBankOpen] = useState<boolean>(false);
@@ -17,17 +28,18 @@ export const Table = memo(() => {
     const [employersPerPage, setEmployersPerPage] = useState<number>(10);
     const [lastEmployerIndex, setLastEmployerIndex] = useState<number>(currentPage * employersPerPage);
     const [firstEmployerIndex, setFirstEmployerIndex] = useState<number>(lastEmployerIndex - employersPerPage);
+    const [employersList, setEmployersList] = useState<EmployersType[]>(Employers);
     const [currentEmployer, setCurrentEmployer] = useState<EmployersType[]>(
-        Employers.slice(firstEmployerIndex, lastEmployerIndex),
+        employersList.slice(firstEmployerIndex, lastEmployerIndex),
     );
     const [sortCol, setSortCol] = useState<string>('');
+    const searchText = useSelector(getSearch);
 
     const returnEmployersToInitial = useCallback(() => {
-        setCurrentEmployer(Employers.slice(firstEmployerIndex, lastEmployerIndex));
-    }, [firstEmployerIndex, lastEmployerIndex]);
+        setCurrentEmployer(employersList.slice(firstEmployerIndex, lastEmployerIndex));
+    }, [employersList, firstEmployerIndex, lastEmployerIndex]);
 
     const sortData = useCallback((rule: string) => {
-        console.log(rule);
         if (sortCol === '') {
             setSortCol(rule);
         } else {
@@ -38,14 +50,15 @@ export const Table = memo(() => {
 
     const pageNumbers = useCallback(() => {
         const numbers = [];
-        for (let i = 1; i <= Math.ceil(Employers.length / employersPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(employersList.length / employersPerPage); i++) {
             numbers.push(i);
         }
         return numbers;
-    }, [employersPerPage]);
+    }, [employersList.length, employersPerPage]);
 
     const paginate = (number: number) => setCurrentPage(number);
 
+    // сортировка по столбцам
     useEffect(() => {
         setCurrentEmployer((prev) => {
             const copyData = prev.concat();
@@ -56,6 +69,7 @@ export const Table = memo(() => {
         });
     }, [sortCol]);
 
+    // установка корректных данных относительно страницы
     useEffect(() => {
         setLastEmployerIndex(currentPage * employersPerPage);
     }, [currentPage, employersPerPage]);
@@ -65,10 +79,20 @@ export const Table = memo(() => {
     }, [employersPerPage, lastEmployerIndex]);
 
     useEffect(() => {
-        setCurrentEmployer(Employers.slice(firstEmployerIndex, lastEmployerIndex));
-    }, [firstEmployerIndex, lastEmployerIndex]);
+        setCurrentEmployer(employersList.slice(firstEmployerIndex, lastEmployerIndex));
+    }, [employersList, firstEmployerIndex, lastEmployerIndex]);
 
-    // массивы данных таблицы
+    // поиск
+    useEffect(() => {
+        const Debounce = setTimeout(() => {
+            const filteredEmployers = filterEmployers(searchText, Employers);
+            setEmployersList(filteredEmployers);
+        }, 300);
+
+        return () => clearTimeout(Debounce);
+    }, [employersList, searchText]);
+
+    // массивы данных
     const employersNames = useMemo(() => currentEmployer.map((item, index) => (
         <tr key={`${item.name}_${item.number}`}>
             <td>{index + 1}</td>
