@@ -1,7 +1,6 @@
 {
   "name": "default-frontend",
   "version": "1.0.0",
-  "homepage": "https://nikolaysarody.github.io/h2o-test",
   "description": "",
   "main": "index.js",
   "scripts": {
