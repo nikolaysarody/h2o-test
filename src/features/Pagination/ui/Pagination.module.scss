@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 36px 19px 36px;
+    padding: 0 36px 19px;
     top: -9px;
     position: relative;
 }
@@ -10,7 +10,7 @@
 .list {
     list-style: none;
     display: flex;
-    margin: 0 39px 0 39px;
+    margin: 0 39px;
 
     &Wrapper {
         display: flex;
@@ -50,7 +50,7 @@
     font-size: 14px;
     line-height: 44px;
     letter-spacing: -0.56px;
-    color: #6D7986;
+    color: #6d7986;
     width: 211px;
 }
 
@@ -62,14 +62,14 @@
         font-weight: 600;
         font-size: 14px;
         letter-spacing: -0.56px;
-        color: #6D7986;
+        color: #6d7986;
     }
 
     select {
         width: 51px;
         height: 24px;
-        background: #FFFFFF;
-        border: 1.5px solid #F8F8F8;
+        background: #fff;
+        border: 1.5px solid #f8f8f8;
         border-radius: 6px;
         font-weight: 700;
         font-size: 12px;
@@ -87,5 +87,5 @@
 }
 
 .current {
-    color: #54D3C2;
+    color: #54d3c2;
 }

@@ -6,7 +6,7 @@
 tbody {
     tr {
         &:nth-child(2n+1) {
-            background: rgba(248, 248, 248, 0.5);
+            background: rgb(248 248 248 / 50%);
         }
     }
 }
@@ -36,7 +36,8 @@ tbody {
     top: -40px;
     position: relative;
 
-    th, td {
+    th,
+    td {
         &:last-child {
             border-right: 0;
         }
@@ -45,7 +46,7 @@ tbody {
     tbody {
         tr {
             &:nth-child(2n) {
-                background: rgba(229, 248, 246, 0.5);
+                background: rgb(229 248 246 / 50%);
             }
         }
     }
@@ -54,6 +55,6 @@ tbody {
 .hoverable {
     &:hover {
         cursor: default;
-        color: #54D3C2;
+        color: #54d3c2;
     }
 }

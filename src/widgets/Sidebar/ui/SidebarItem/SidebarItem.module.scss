@@ -7,10 +7,9 @@
     justify-content: center;
 
     &.active {
-        background: rgba(169, 233, 224, 0.75);
+        background: rgb(169 233 224 / 75%);
     }
 }
-
 
 .item {
     list-style-type: none;

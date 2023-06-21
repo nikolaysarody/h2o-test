@@ -1,5 +1,5 @@
 .MenuItem {
-    color: #D2D1D1;
+    color: #d2d1d1;
     font-weight: 600;
     margin-right: 40px;
     cursor: pointer;
@@ -11,16 +11,16 @@
 
     &.active {
         position: relative;
-        color: #323F47;
+        color: #323f47;
         font-weight: 700;
         padding-bottom: 9.5px;
 
-        &:after {
-            content: '';
+        &::after {
+            content: "";
             display: block;
             position: relative;
             top: 13px;
-            border-bottom: 4.5px solid #54D3C2;
+            border-bottom: 4.5px solid #54d3c2;
             border-radius: 5px;
         }
     }

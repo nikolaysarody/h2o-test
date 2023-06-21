@@ -15,3 +15,13 @@
 Проект написан в соответствии с методологией Feature sliced design
 
 Ссылка на документацию - [feature sliced design](https://feature-sliced.design/docs/get-started/tutorial)
+
+## Скрипты
+
+- `npm run start` - Запуск проекта
+- `npm run build:prod` - Сборка в prod режиме
+- `npm run build:dev` - Сборка в dev режиме (не минимизирован)
+- `npm run lint:ts` - Проверка ts файлов линтером
+- `npm run lint:ts:fix` - Исправление ts файлов линтером
+- `npm run lint:scss` - Проверка scss файлов style линтером
+- `npm run lint:scss:fix` - Исправление scss файлов style линтером

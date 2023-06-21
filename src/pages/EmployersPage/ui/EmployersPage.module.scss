@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background: #F8F8F8;
+    background: #f8f8f8;
     border-radius: 56px;
 }
 
@@ -18,7 +18,7 @@
     font-size: var(--font-size-xl);
     line-height: var(--font-line-xl);
     letter-spacing: -0.56px;
-    color: #323F47;
+    color: #323f47;
 }
 
 .tools {
@@ -26,7 +26,7 @@
     align-items: center;
     width: 1318px;
     height: 127px;
-    background: #FFFFFF;
+    background: #fff;
     border-radius: 32px;
     margin: 21px 0 0 42px;
     position: relative;
@@ -34,10 +34,10 @@
 
 .table {
     display: flex;
-    margin: 81px 40px 40px 40px;
-    background: #FFFFFF;
-    border: 2px solid #F8F8F8;
+    margin: 81px 40px 40px;
+    background: #fff;
+    border: 2px solid #f8f8f8;
     border-radius: 32px;
+
     //overflow: hidden;
 }
-
