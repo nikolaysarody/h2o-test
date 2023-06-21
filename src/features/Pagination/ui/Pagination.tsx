@@ -7,7 +7,7 @@ interface PaginationProps {
     employersPerPage: number;
     setEmployersPerPage: (item: number) => void;
     pageNumbers: () => number[];
-    paginate: (number: number) => void;
+    paginate: (number: number, employers?: number) => void;
     firstEmployerIndex: number;
     lastEmployerIndex: number;
     totalEmployers: number;
@@ -60,19 +60,28 @@ export const Pagination = memo((props: PaginationProps) => {
                 <select defaultValue={employersPerPage}>
                     <option
                         value={10}
-                        onClick={() => setEmployersPerPage(10)}
+                        onClick={() => {
+                            setEmployersPerPage(10);
+                            paginate(currentPage, 10);
+                        }}
                     >
                         10
                     </option>
                     <option
                         value={15}
-                        onClick={() => setEmployersPerPage(15)}
+                        onClick={() => {
+                            setEmployersPerPage(15);
+                            paginate(currentPage, 15);
+                        }}
                     >
                         15
                     </option>
                     <option
                         value={20}
-                        onClick={() => setEmployersPerPage(20)}
+                        onClick={() => {
+                            setEmployersPerPage(20);
+                            paginate(currentPage, 20);
+                        }}
                     >
                         20
                     </option>

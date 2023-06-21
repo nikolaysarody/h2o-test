@@ -65,10 +65,10 @@ export const EmployersTable = memo(() => {
         return numbers;
     }, [employersList.length, employersPerPage]);
 
-    const paginate = (number: number) => {
+    const paginate = (number: number, employers?: number) => {
         setCurrentPage(number);
-        const lastIndex = number * employersPerPage;
-        const firstIndex = lastIndex - employersPerPage;
+        const lastIndex = number * (employers !== undefined ? employers : employersPerPage);
+        const firstIndex = lastIndex - (employers !== undefined ? employers : employersPerPage);
         setLastEmployerIndex(lastIndex);
         setFirstEmployerIndex(firstIndex);
     };
