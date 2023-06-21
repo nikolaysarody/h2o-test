@@ -65,15 +65,13 @@ export const EmployersTable = memo(() => {
         return numbers;
     }, [employersList.length, employersPerPage]);
 
-    const paginate = (number: number) => setCurrentPage(number);
-
-    useEffect(() => {
-        setLastEmployerIndex(currentPage * employersPerPage);
-    }, [currentPage, employersPerPage]);
-
-    useEffect(() => {
-        setFirstEmployerIndex(lastEmployerIndex - employersPerPage);
-    }, [employersPerPage, lastEmployerIndex]);
+    const paginate = (number: number) => {
+        setCurrentPage(number);
+        const lastIndex = number * employersPerPage;
+        const firstIndex = lastIndex - employersPerPage;
+        setLastEmployerIndex(lastIndex);
+        setFirstEmployerIndex(firstIndex);
+    };
 
     useEffect(() => {
         setCurrentEmployers(employersList.slice(firstEmployerIndex, lastEmployerIndex));
