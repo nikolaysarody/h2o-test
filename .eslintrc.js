@@ -53,6 +53,7 @@ module.exports = {
         'jsx-a11y/no-noninteractive-element-interactions': 0,
         'react/no-array-index-key': 0,
         'no-plusplus': 0,
+        'jsx-a11y/no-autofocus': 0,
     },
     globals: {
         __IS_DEV__: true,

@@ -12,4 +12,11 @@
     position: absolute;
     right: 35px;
     cursor: pointer;
+
+    &.open {
+        background-color: #54D3C2;
+        color: white;
+    }
+
+    transition: background-color 0.3s;
 }
