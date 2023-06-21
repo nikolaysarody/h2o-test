@@ -18,7 +18,11 @@ const checkDate = (date: Date) => {
 };
 
 const parseDate = (value: string) => {
-    return value.split('.');
+    return new Date(
+        +value.split('.')[2],
+        +value.split('.')[1],
+        +value.split('.')[0],
+    );
 };
 
 export const Table = memo((props: TableProps) => {
@@ -61,28 +65,18 @@ export const Table = memo((props: TableProps) => {
             <td>{item.citizenship}</td>
             <td>{item.passport}</td>
             <td>{item.issued}</td>
-            <td
-                className={
-                    checkDate(new Date(
-                        +parseDate(item.validity_passport)[2],
-                        +parseDate(item.validity_passport)[1],
-                        +parseDate(item.validity_passport)[0],
-                    )) ? styles.expired : ''
-                }
+            <td className={
+                checkDate(parseDate(item.validity_passport)) ? styles.expired : ''
+            }
             >
                 {item.validity_passport}
             </td>
             <td>{item.birthplace}</td>
             <td>{item.residence}</td>
             <td>{item.patent}</td>
-            <td
-                className={
-                    checkDate(new Date(
-                        +parseDate(item.validity_patent)[2],
-                        +parseDate(item.validity_patent)[1],
-                        +parseDate(item.validity_patent)[0],
-                    )) ? styles.expired : ''
-                }
+            <td className={
+                checkDate(parseDate(item.validity_patent)) ? styles.expired : ''
+            }
             >
                 {item.validity_patent}
             </td>
