@@ -28,7 +28,9 @@ export const Pagination = memo((props: PaginationProps) => {
     return (
         <article className={styles.Pagination}>
             <p className={styles.count}>
-                {`показано ${firstEmployerIndex}-${lastEmployerIndex} из ${totalEmployers} результатов`}
+                {`показано ${firstEmployerIndex}-${
+                    lastEmployerIndex > totalEmployers ? totalEmployers : lastEmployerIndex
+                } из ${totalEmployers} результатов`}
             </p>
             <div className={styles.listWrapper}>
                 <PaginateIcon

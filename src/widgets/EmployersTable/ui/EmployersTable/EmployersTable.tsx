@@ -36,6 +36,7 @@ export const EmployersTable = memo(() => {
         setCurrentEmployers(employersList.slice(firstEmployerIndex, lastEmployerIndex));
     }, [employersList, firstEmployerIndex, lastEmployerIndex]);
 
+    // сортировка по столбцам
     const sortData = useCallback((rule: string) => {
         if (sortCol === '') {
             setSortCol(rule);
@@ -44,16 +45,6 @@ export const EmployersTable = memo(() => {
             returnEmployersToInitial();
         }
     }, [returnEmployersToInitial, sortCol]);
-
-    const pageNumbers = useCallback(() => {
-        const numbers = [];
-        for (let i = 1; i <= Math.ceil(employersList.length / employersPerPage); i++) {
-            numbers.push(i);
-        }
-        return numbers;
-    }, [employersList.length, employersPerPage]);
-
-    const paginate = (number: number) => setCurrentPage(number);
 
     useEffect(() => {
         setCurrentEmployers((prev) => {
@@ -64,6 +55,17 @@ export const EmployersTable = memo(() => {
             return sortData;
         });
     }, [sortCol]);
+
+    // пагинация
+    const pageNumbers = useCallback(() => {
+        const numbers = [];
+        for (let i = 1; i <= Math.ceil(employersList.length / employersPerPage); i++) {
+            numbers.push(i);
+        }
+        return numbers;
+    }, [employersList.length, employersPerPage]);
+
+    const paginate = (number: number) => setCurrentPage(number);
 
     useEffect(() => {
         setLastEmployerIndex(currentPage * employersPerPage);
@@ -77,6 +79,7 @@ export const EmployersTable = memo(() => {
         setCurrentEmployers(employersList.slice(firstEmployerIndex, lastEmployerIndex));
     }, [employersList, firstEmployerIndex, lastEmployerIndex]);
 
+    // поиск
     useEffect(() => {
         const Debounce = setTimeout(() => {
             const filteredEmployers = filterEmployers(searchText, Employers);
