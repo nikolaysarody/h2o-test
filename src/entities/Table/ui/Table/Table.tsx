@@ -5,25 +5,13 @@ import {
 } from 'react';
 import { EmployersType } from 'shared/assets/model';
 import { Swiper } from 'shared/ui/Swiper/Swiper';
-import { TableItem } from '../TableItem/TableItem';
+import { TableItem, TableItemBodyProps } from '../TableItem/TableItem';
 import styles from './Table.module.scss';
 
 interface TableProps {
     currentEmployersList: EmployersType[];
     sortData: (rule: string) => void;
 }
-
-const checkDate = (date: Date) => {
-    return new Date() > date;
-};
-
-const parseDate = (value: string) => {
-    return new Date(
-        +value.split('.')[2],
-        +value.split('.')[1],
-        +value.split('.')[0],
-    );
-};
 
 export const Table = memo((props: TableProps) => {
     const {
@@ -35,67 +23,81 @@ export const Table = memo((props: TableProps) => {
     const [isHROpen, setHROpen] = useState<boolean>(false);
 
     // массивы данных
-    const employersNames = useMemo(() => currentEmployersList.map((item, index) => (
-        <tr key={`${item.name}_${item.number}`}>
-            <td>{index + 1}</td>
-            <td className={styles.hoverable}>{item.name}</td>
-        </tr>
-    )), [currentEmployersList]);
+    const employersNames: TableItemBodyProps[] = useMemo(() => currentEmployersList.map(
+        (item, index) => {
+            return {
+                list: [
+                    index + 1,
+                    item.name,
+                ],
+                id: item.number,
+            };
+        },
+    ), [currentEmployersList]);
 
-    const employersInfos = useMemo(() => currentEmployersList.map((item) => (
-        <tr key={`${item.id}_${item.number}`}>
-            <td>{item.id}</td>
-            <td>{item.phone}</td>
-            <td>{item.gender}</td>
-            <td>{item.birthday}</td>
-            <td>{item.metro}</td>
-            <td>{item.address}</td>
-        </tr>
-    )), [currentEmployersList]);
+    const employersInfos: TableItemBodyProps[] = useMemo(() => currentEmployersList.map(
+        (item) => {
+            return {
+                list: [
+                    item.id,
+                    item.phone,
+                    item.gender,
+                    item.birthday,
+                    item.metro,
+                    item.address,
+                ],
+                id: item.number,
+            };
+        },
+    ), [currentEmployersList]);
 
-    const employersBanks = useMemo(() => currentEmployersList.map((item) => (
-        <tr key={`${item.bank}_${item.number}`}>
-            <td>{item.bank}</td>
-            <td>{item.card}</td>
-        </tr>
-    )), [currentEmployersList]);
+    const employersBanks: TableItemBodyProps[] = useMemo(() => currentEmployersList.map(
+        (item) => {
+            return {
+                list: [
+                    item.bank,
+                    item.card,
+                ],
+                id: item.number,
+            };
+        },
+    ), [currentEmployersList]);
 
-    const employersDocs = useMemo(() => currentEmployersList.map((item) => (
-        <tr key={`${item.citizenship}_${item.number}`}>
-            <td>{item.citizenship}</td>
-            <td>{item.passport}</td>
-            <td>{item.issued}</td>
-            <td className={
-                checkDate(parseDate(item.validity_passport)) ? styles.expired : ''
-            }
-            >
-                {item.validity_passport}
-            </td>
-            <td>{item.birthplace}</td>
-            <td>{item.residence}</td>
-            <td>{item.patent}</td>
-            <td className={
-                checkDate(parseDate(item.validity_patent)) ? styles.expired : ''
-            }
-            >
-                {item.validity_patent}
-            </td>
-            <td>{item.snils}</td>
-            <td>{item.inn}</td>
-            <td>{item.medcard}</td>
-        </tr>
-    )), [currentEmployersList]);
+    const employersDocs: TableItemBodyProps[] = useMemo(() => currentEmployersList.map(
+        (item) => {
+            return {
+                list: [
+                    item.citizenship,
+                    item.passport,
+                    item.issued,
+                    item.validityPassport,
+                    item.birthplace,
+                    item.residence,
+                    item.patent,
+                    item.validityPatent,
+                    item.snils,
+                    item.inn,
+                    item.medcard,
+                ],
+                id: item.number,
+                validatableIndex: [3, 7],
+            };
+        },
+    ), [currentEmployersList]);
 
-    const employersHR = useMemo(() => currentEmployersList.map((item) => (
-        <tr key={`${item.post}_${item.number}`}>
-            <td>{item.post}</td>
-            <td>{item.subdivision}</td>
-            <td>{item.solution}</td>
-            <td>{item.source}</td>
-            <td>{item.date}</td>
-            <td>{item.note}</td>
-        </tr>
-    )), [currentEmployersList]);
+    const employersHR: TableItemBodyProps[] = useMemo(() => currentEmployersList.map((item) => {
+        return {
+            list: [
+                item.post,
+                item.subdivision,
+                item.solution,
+                item.source,
+                item.date,
+                item.note,
+            ],
+            id: item.number,
+        };
+    }), [currentEmployersList]);
 
     // функции для сворачивания и разворачивания частей таблицы
     const swipeBank = () => {

@@ -1,7 +1,13 @@
-import { memo, ReactNode, useState } from 'react';
+import { memo, useState } from 'react';
 import DropdownIcon from 'shared/assets/icons/dropdown.svg';
 import { classNames } from 'shared/lib/classNames/classNames';
 import styles from './TableItem.module.scss';
+
+export interface TableItemBodyProps {
+    list: (string | number)[];
+    id: number;
+    validatableIndex?: number[];
+}
 
 interface TableItemProps {
     head: {
@@ -13,12 +19,23 @@ interface TableItemProps {
         sortableIndex: number[];
         sortableCallback: (key: string) => void;
     };
-    body: ReactNode[];
+    body: TableItemBodyProps[]
 }
+
+const checkDate = (date: Date) => {
+    return new Date() > date;
+};
+
+const parseDate = (value: string) => {
+    return new Date(
+        +value.split('.')[2],
+        +value.split('.')[1],
+        +value.split('.')[0],
+    );
+};
 
 export const TableItem = memo(({ head, body }: TableItemProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-
     return (
         <table className={styles.TableItem}>
             <thead>
@@ -51,7 +68,23 @@ export const TableItem = memo(({ head, body }: TableItemProps) => {
                 </tr>
             </thead>
             <tbody>
-                {body}
+                {body.map((row, index) => (
+                    <tr key={`${row.list[1]}_${row.id}_${index}`}>
+                        {row.list.map((item, i) => (
+                            <td
+                                key={`${item}_${row.id}_${index}_${i}`}
+                                className={
+                                    row.validatableIndex
+                                    && row.validatableIndex.includes(i)
+                                    && checkDate(parseDate(item as string))
+                                        ? styles.expired : ''
+                                }
+                            >
+                                {item}
+                            </td>
+                        ))}
+                    </tr>
+                ))}
             </tbody>
         </table>
     );
