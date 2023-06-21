@@ -1,9 +1,12 @@
 {
   "name": "default-frontend",
   "version": "1.0.0",
+  "homepage": "https://nikolaysarody.github.io/h2o-test",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "webpack serve --env port=3000",
     "build:prod": "webpack --env mode=production",
     "build:dev": "webpack --env mode=development",
@@ -56,6 +59,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-storybook": "^0.6.12",
     "file-loader": "^6.2.0",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.0",
     "identity-obj-proxy": "^3.0.0",
