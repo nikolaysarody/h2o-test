@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useSelector } from 'react-redux';
 import { getEditMode } from 'entities/Table/model/selectors/getEditMode/getEditMode';
@@ -21,7 +21,7 @@ const parseDate = (value: string) => {
     );
 };
 
-export const TableBodyItem = ({ item, validatable }: TableBodyItemProps) => {
+export const TableBodyItem = memo(({ item, validatable }: TableBodyItemProps) => {
     const isEditMode = useSelector(getEditMode);
     const [isInputOpen, setInputOpen] = useState<boolean>(false);
     const [currentValue, setCurrentValue] = useState<string | number>(item);
@@ -56,4 +56,4 @@ export const TableBodyItem = ({ item, validatable }: TableBodyItemProps) => {
             {data()}
         </td>
     );
-};
+});

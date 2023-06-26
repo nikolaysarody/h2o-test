@@ -1,5 +1,5 @@
 import {
-    memo,
+    memo, useCallback,
     useMemo,
     useState,
 } from 'react';
@@ -21,6 +21,74 @@ export const Table = memo((props: TableProps) => {
     const [isBankOpen, setBankOpen] = useState<boolean>(false);
     const [isDocsOpen, setDocsOpen] = useState<boolean>(false);
     const [isHROpen, setHROpen] = useState<boolean>(false);
+
+    // заголовки
+
+    const headerNames = {
+        cols: [
+            { rus: '№' },
+            { rus: 'Имя сотрудника', eng: 'name' },
+        ],
+        sortableIndex: [1],
+        sortableCallback: sortData,
+    };
+
+    const headerInfos = {
+        title: 'Основная информация',
+        cols: [
+            { rus: 'ID' },
+            { rus: 'Номер телефона' },
+            { rus: 'Пол', eng: 'gender' },
+            { rus: 'Дата рождения' },
+            { rus: 'Метро', eng: 'metro' },
+            { rus: 'Адрес проживания' },
+        ],
+        sortableIndex: [2, 4],
+        sortableCallback: sortData,
+    };
+
+    const headerBanks = {
+        title: 'Банковская информация',
+        cols: [
+            { rus: 'Банк', eng: 'bank' },
+            { rus: 'Номер карты' },
+        ],
+        sortableIndex: [0],
+        sortableCallback: sortData,
+    };
+
+    const headerDocs = {
+        title: 'Документы сотрудника',
+        cols: [
+            { rus: 'Гражданство', eng: 'citizenship' },
+            { rus: 'Паспорт' },
+            { rus: 'Кем выдан' },
+            { rus: 'Срок действия' },
+            { rus: 'Место рождения' },
+            { rus: 'Адрес прописки' },
+            { rus: 'Патент', eng: 'patent' },
+            { rus: 'Срок действия' },
+            { rus: 'СНИЛС' },
+            { rus: 'ИНН' },
+            { rus: 'Мед. книжка' },
+        ],
+        sortableIndex: [0, 6],
+        sortableCallback: sortData,
+    };
+
+    const headerHR = {
+        title: 'Информация от HR',
+        cols: [
+            { rus: 'Должность', eng: 'post' },
+            { rus: 'Подразделение', eng: 'subdivision' },
+            { rus: 'Решение', eng: 'solution' },
+            { rus: 'Источник' },
+            { rus: 'Дата' },
+            { rus: 'Примечание' },
+        ],
+        sortableIndex: [0, 1, 2],
+        sortableCallback: sortData,
+    };
 
     // массивы данных
     const employersNames: TableItemBodyProps[] = useMemo(() => currentEmployersList.map(
@@ -100,108 +168,52 @@ export const Table = memo((props: TableProps) => {
     }), [currentEmployersList]);
 
     // функции для сворачивания и разворачивания частей таблицы
-    const swipeBank = () => {
+    const swipeBank = useCallback(() => {
         setBankOpen((prev) => !prev);
         setDocsOpen(false);
         setHROpen(false);
-    };
+    }, []);
 
-    const swipeDocs = () => {
+    const swipeDocs = useCallback(() => {
         setDocsOpen((prev) => !prev);
         setHROpen(false);
-    };
+    }, []);
 
-    const swipeHR = () => {
+    const swipeHR = useCallback(() => {
         setHROpen((prev) => !prev);
-    };
+    }, []);
 
     return (
         <div className={styles.wrapper}>
             <div className={styles.info}>
                 <TableItem
-                    head={{
-                        cols: [
-                            { rus: '№' },
-                            { rus: 'Имя сотрудника', eng: 'name' },
-                        ],
-                        sortableIndex: [1],
-                        sortableCallback: sortData,
-                    }}
+                    head={headerNames}
                     body={employersNames}
                 />
             </div>
             <div className={styles.scroll}>
                 <TableItem
-                    head={{
-                        title: 'Основная информация',
-                        cols: [
-                            { rus: 'ID' },
-                            { rus: 'Номер телефона' },
-                            { rus: 'Пол', eng: 'gender' },
-                            { rus: 'Дата рождения' },
-                            { rus: 'Метро', eng: 'metro' },
-                            { rus: 'Адрес проживания' },
-                        ],
-                        sortableIndex: [2, 4],
-                        sortableCallback: sortData,
-                    }}
+                    head={headerInfos}
                     body={employersInfos}
                 />
                 <Swiper swipe={swipeBank} isOpen />
                 {isBankOpen && (
                     <TableItem
-                        head={{
-                            title: 'Банковская информация',
-                            cols: [
-                                { rus: 'Банк', eng: 'bank' },
-                                { rus: 'Номер карты' },
-                            ],
-                            sortableIndex: [0],
-                            sortableCallback: sortData,
-                        }}
+                        head={headerBanks}
                         body={employersBanks}
                     />
                 )}
                 <Swiper swipe={swipeDocs} isOpen={isBankOpen} />
                 {isDocsOpen && (
                     <TableItem
-                        head={{
-                            title: 'Документы сотрудника',
-                            cols: [
-                                { rus: 'Гражданство', eng: 'citizenship' },
-                                { rus: 'Паспорт' },
-                                { rus: 'Кем выдан' },
-                                { rus: 'Срок действия' },
-                                { rus: 'Место рождения' },
-                                { rus: 'Адрес прописки' },
-                                { rus: 'Патент', eng: 'patent' },
-                                { rus: 'Срок действия' },
-                                { rus: 'СНИЛС' },
-                                { rus: 'ИНН' },
-                                { rus: 'Мед. книжка' },
-                            ],
-                            sortableIndex: [0, 6],
-                            sortableCallback: sortData,
-                        }}
+                        head={headerDocs}
                         body={employersDocs}
                     />
                 )}
                 <Swiper swipe={swipeHR} isOpen={isDocsOpen} />
                 {isHROpen && (
                     <TableItem
-                        head={{
-                            title: 'Информация от HR',
-                            cols: [
-                                { rus: 'Должность', eng: 'post' },
-                                { rus: 'Подразделение', eng: 'subdivision' },
-                                { rus: 'Решение', eng: 'solution' },
-                                { rus: 'Источник' },
-                                { rus: 'Дата' },
-                                { rus: 'Примечание' },
-                            ],
-                            sortableIndex: [0, 1, 2],
-                            sortableCallback: sortData,
-                        }}
+                        head={headerHR}
                         body={employersHR}
                     />
                 )}

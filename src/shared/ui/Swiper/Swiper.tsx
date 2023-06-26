@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import SwiperIcon from 'shared/assets/icons/swiper.svg';
 import { classNames } from 'shared/lib/classNames/classNames';
 import styles from './Swiper.module.scss';
@@ -8,7 +8,7 @@ interface SwiperProps {
     isOpen: boolean;
 }
 
-export const Swiper = ({ swipe, isOpen }: SwiperProps) => {
+export const Swiper = memo(({ swipe, isOpen }: SwiperProps) => {
     const [open, setOpen] = useState<boolean>(false);
 
     if (!isOpen) {
@@ -25,4 +25,4 @@ export const Swiper = ({ swipe, isOpen }: SwiperProps) => {
             />
         </div>
     );
-};
+});
